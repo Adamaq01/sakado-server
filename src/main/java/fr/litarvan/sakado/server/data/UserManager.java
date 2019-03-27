@@ -264,7 +264,11 @@ public class UserManager
 
     public void remove(User user)
     {
-        user.studentClass().getLoggedUsers().remove(user);
+    	if (user.getName() != null) // Logged but not fetched
+		{
+			user.studentClass().getLoggedUsers().remove(user);
+		}
+
         this.users.remove(user);
     }
 

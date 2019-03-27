@@ -21,6 +21,11 @@ public abstract class BaseRefreshTask extends RefreshTask
     {
         for (User user : userManager.getLoggedUsers())
         {
+            if (user.getName() == null) // Logged but not fetched
+            {
+                continue;
+            }
+
             refresh(user);
         }
     }
