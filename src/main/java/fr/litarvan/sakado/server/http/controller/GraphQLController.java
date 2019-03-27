@@ -114,6 +114,7 @@ public class GraphQLController extends Controller
                                             .dataFetcher("tomorrow", environment -> getTomorrow(environment.getSource()))
                                             .dataFetcher("away", environment -> getAway(environment.getSource()))
                                             .dataFetcher("homeworksEnabled", environment -> areHomeworksEnabled(environment.getSource()))
+											.dataFetcher("averagesEnabled", environment -> areAveragesEnabled(environment.getSource()))
                                             .dataFetcher("class", environment -> getStudentClass(environment.getSource()))
                                             .dataFetcher("holidays", environment -> getNextHolidays(environment.getSource())))
             .type("MutableUser", builder -> builder.dataFetcher("homework", environment -> getHomework(environment.getContext(), environment.getArgument("id")))
@@ -135,16 +136,9 @@ public class GraphQLController extends Controller
         return GraphQL.newGraphQL(schema).build();
     }
 
-    public String[] getEstablishments()
+    public Establishment[] getEstablishments()
     {
-        String[] establishment = new String[data.getEstablishments().length];
-
-        for (int i = 0; i < data.getEstablishments().length; i++)
-        {
-            establishment[i] = data.getEstablishments()[i].getName();
-        }
-
-        return establishment;
+    	return data.getEstablishments();
     }
 
     public boolean isAdmin(User user)
@@ -374,6 +368,11 @@ public class GraphQLController extends Controller
     {
         return user.getHomeworks() != null;
     }
+
+	public boolean areAveragesEnabled(User user)
+	{
+		return user.getAverages() != null;
+	}
 
     public Reminder addReminder(User user, String title, String content, long time, boolean studentClass)
     {

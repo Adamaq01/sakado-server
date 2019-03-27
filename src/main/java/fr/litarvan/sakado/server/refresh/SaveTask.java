@@ -40,10 +40,16 @@ public class SaveTask extends RefreshTask
                 {
                     for (User user : userManager.getLoggedUsers())
                     {
+                    	if (user.getName() == null) // Logged, not fetched
+                    	{
+                    		continue;
+						}
+
                         if (user.getName().equals(member))
                         {
                             memberList.add(new SavedUser(user.getToken(),
                                                          user.getEstablishment().getName(),
+                                                         user.getMethod().getName(),
                                                          user.getUsername(),
                                                          user.getPassword(),
                                                          user.getDeviceToken(),

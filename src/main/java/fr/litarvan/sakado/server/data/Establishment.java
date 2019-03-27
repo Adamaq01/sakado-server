@@ -7,7 +7,7 @@ import java.util.Map;
 public class Establishment
 {
     private String name;
-    private FetchMethod method;
+    private FetchMethod[] methods;
     private int zone;
 
     private transient List<StudentClass> classes;
@@ -17,12 +17,12 @@ public class Establishment
         this.classes = new ArrayList<>();
     }
 
-    public Establishment(String name, FetchMethod method, int zone)
+    public Establishment(String name, FetchMethod[] methods, int zone)
     {
         this();
 
         this.name = name;
-        this.method = method;
+        this.methods = methods;
         this.zone = zone;
     }
 
@@ -57,9 +57,9 @@ public class Establishment
         return name;
     }
 
-    public FetchMethod getMethod()
+    public FetchMethod[] getMethods()
     {
-        return method;
+        return methods;
     }
 
     public int getZone()
@@ -74,6 +74,7 @@ public class Establishment
 
     public static class FetchMethod
     {
+    	private String name;
         private String server;
         private String url;
         private String cas;
@@ -82,14 +83,19 @@ public class Establishment
         {
         }
 
-        public FetchMethod(String server, String url, String cas)
+        public FetchMethod(String name, String server, String url, String cas)
         {
             this.server = server;
             this.url = url;
             this.cas = cas;
         }
 
-        public String getServer()
+		public String getName()
+		{
+			return name;
+		}
+
+		public String getServer()
         {
             return server;
         }

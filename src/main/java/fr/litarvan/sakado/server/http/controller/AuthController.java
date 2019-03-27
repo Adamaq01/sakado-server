@@ -42,8 +42,9 @@ public class AuthController extends Controller
         String deviceToken = require(request, "deviceToken");
 
         String establishment = require(request, "establishment");
+        String method = require(request, "method");
 
-        User user = userManager.login(establishment, username, password, deviceToken);
+        User user = userManager.login(establishment, method, username, password, deviceToken);
 
         return json(apply(user), response);
     }

@@ -64,6 +64,11 @@ public class RefreshService
 
         for (User user : users)
         {
+        	if (user.getName() == null) // Logged, but not fetched
+        	{
+        		continue;
+			}
+
             log.info("Refreshing user '{}'...", user.getName());
             try
             {

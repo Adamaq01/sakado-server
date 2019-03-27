@@ -5,11 +5,20 @@ schema {
 
 type Query {
     user: User
-    establishments: [String!]!
+    establishments: [Establishment!]!
 }
 
 type Mutation {
     user: MutableUser
+}
+
+type Establishment {
+    name: String!
+    methods: [FetchMethod!]!
+}
+
+type FetchMethod {
+    name: String!
 }
 
 type User {
@@ -24,6 +33,7 @@ type User {
     representative: Boolean!
 
     homeworksEnabled: Boolean!
+    averagesEnabled: Boolean!
 
     timetable: [Week!]!
     menu: [[String!]]

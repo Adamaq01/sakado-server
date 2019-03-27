@@ -6,16 +6,18 @@ public class SavedUser
 {
     private String token;
     private String establishment;
+    private String method;
     private String username;
     private String password;
     private String deviceToken;
     private Reminder[] reminders;
     private long lastLogin;
 
-    public SavedUser(String token, String establishment, String username, String password, String deviceToken, Reminder[] reminders, long lastLogin)
+    public SavedUser(String token, String establishment, String method, String username, String password, String deviceToken, Reminder[] reminders, long lastLogin)
     {
         this.token = token;
         this.establishment = establishment;
+        this.method = method;
         this.username = username;
         this.password = password;
         this.deviceToken = deviceToken;
@@ -33,7 +35,12 @@ public class SavedUser
         return establishment;
     }
 
-    public String getUsername()
+	public String getMethod()
+	{
+		return method;
+	}
+
+	public String getUsername()
     {
         return username;
     }

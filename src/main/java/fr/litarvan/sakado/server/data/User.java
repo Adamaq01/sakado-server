@@ -17,6 +17,7 @@
  */
 package fr.litarvan.sakado.server.data;
 
+import fr.litarvan.sakado.server.data.Establishment.FetchMethod;
 import fr.litarvan.sakado.server.data.network.*;
 
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class User
     private String token;
 
     private Establishment establishment;
+    private FetchMethod method;
 
     private String username;
     private String password;
@@ -50,11 +52,12 @@ public class User
 
     private long lastLogin;
 
-    public User(DataServer server, String token, Establishment establishment, String username, String password, String deviceToken)
+    public User(DataServer server, String token, Establishment establishment, FetchMethod method, String username, String password, String deviceToken)
     {
         this.server = server;
         this.token = token;
         this.establishment = establishment;
+        this.method = method;
         this.username = username;
         this.password = password;
         this.deviceToken = deviceToken;
@@ -64,7 +67,7 @@ public class User
 
     public void login() throws IOException, RequestException
     {
-        DataRequest request = new DataRequest("login", username, password, establishment.getMethod().getUrl(), establishment.getMethod().getCas());
+        DataRequest request = new DataRequest("login", username, password, method.getUrl(), method.getCas());
         LoginResponse response;
 
         try
@@ -88,7 +91,7 @@ public class User
 
     public void update() throws IOException, RequestException
     {
-        DataRequest request = new DataRequest("fetch", username, password, establishment.getMethod().getUrl(), establishment.getMethod().getCas());
+        DataRequest request = new DataRequest("fetch", username, password, method.getUrl(), method.getCas());
         FetchResponse response;
 
         try
@@ -158,7 +161,12 @@ public class User
         return establishment;
     }
 
-    public String getUsername()
+	public FetchMethod getMethod()
+	{
+		return method;
+	}
+
+	public String getUsername()
     {
         return username;
     }
